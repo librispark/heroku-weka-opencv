@@ -19,7 +19,7 @@ public class Fep1 {
     @GET
     public String test1() {
         
-    	return "Meow?";
+    	return "{sound: 'Meow?'}";
     }
 	
 }
