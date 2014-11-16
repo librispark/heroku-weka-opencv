@@ -1,8 +1,8 @@
-package com.predict.services;
+package com.module.services;
 
 import java.util.TimeZone;
 
-import com.predict.models.Time;
+import com.module.models.Time;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -1,8 +1,8 @@
-package com.example.models;
+package com.module.models;
 
 import org.junit.Test;
 
-import com.predict.models.Time;
+import com.module.models.Time;
 
 import java.util.TimeZone;
 

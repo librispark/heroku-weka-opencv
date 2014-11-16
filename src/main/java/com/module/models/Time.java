@@ -1,4 +1,4 @@
-package com.predict.models;
+package com.module.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;

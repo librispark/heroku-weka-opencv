@@ -1,4 +1,4 @@
-package com.predict;
+package com.module;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
