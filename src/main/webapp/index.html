@@ -166,7 +166,7 @@
         		return;
         	}
         	
-        	$('#titleAlertStatus').text('Incoming Approaching Read Serial Number');
+        	$('#titleAlertStatus').text('Incoming Train Approaching Read Train Analytics Data');
         	
         	var randSerialNum = Math.round(Math.random()*(Math.pow(2,8)-1)).toString(2);
         	var randSerialNumPad = 8-randSerialNum.length;
@@ -331,7 +331,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand">ENSE623: Predictive Analytics Demo UI</a>
+            <a class="brand">ENSE623: Predictive Analytics Train Switch UI</a>
             <!--
             IMPORTANT:
             This is Heroku specific markup. Remove to customize.
@@ -375,7 +375,7 @@
 			</div>
 			<!-- end Rest Client -->
 			
-			<button id="runClientProgram" type="button" onclick="runClientProgram()" class="btn btn-primary btn-default">Run</button>
+			<button id="runClientProgram" type="button" onclick="runClientProgram()" class="btn btn-primary btn-default">Run (New Train Every 10s)</button>
 			<button type="button" onclick="stopClientProgram()" class="btn btn-primary btn-danger">Stop</button>
 			
 			<br />
@@ -397,7 +397,7 @@
 							<fieldset>
 								<!-- Text input-->
 								<div class="control-group">
-									<label class="control-label" for="trainSerialNumber">Train Serial (8-bit): </label>
+									<label class="control-label" for="trainSerialNumber">Train Data (8-bit): </label>
 									<div class="controls">
 										<input id="trainSerialNumber" name="trainSerialNumber" type="text" placeholder="null" class="input-xlarge">
 									</div>

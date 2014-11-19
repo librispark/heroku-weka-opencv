@@ -63,6 +63,7 @@ public class TrainSwitchAnalyticsSvc {
         WriteResult result = collection.insert(document);
         System.out.println("result: " + result);
         
+        client.close();
 		return result.toString();
 	}
 	
@@ -103,6 +104,7 @@ public class TrainSwitchAnalyticsSvc {
 		System.out.println("Output json server .... \n");
 		System.out.println(train);
 		
+		client.close();
 		return train;
 	} 
 }
