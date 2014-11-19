@@ -389,26 +389,28 @@
 			<button type="button" onclick="trainLeftSwitch()" class="btn btn-primary btn-default">Train Switch On (left)</button>
 			<button type="button" onclick="trainRightSwitch()" class="btn btn-primary btn-default">Train Switch Off (straight)</button>
 			
-			<div class="container">
-				<div class="row clearfix">
-					<div class="col-md-12 column">
-						<br />
-						<form class="form-horizontal">
-							<fieldset>
-								<!-- Text input-->
-								<div class="control-group">
-									<label class="control-label" for="trainSerialNumber">Train Data (8-bit): </label>
-									<div class="controls">
-										<input id="trainSerialNumber" name="trainSerialNumber" type="text" placeholder="null" class="input-xlarge">
-									</div>
-								</div>
-							</fieldset>
-						</form>
+			<form class="form-horizontal">
+				<fieldset>
+					<!-- Text input-->
+					<div class="control-group">
+						<label class="control-label" for="trainSerialNumber">Train Data (8-bit): </label>
+						<div class="controls">
+							<input id="trainSerialNumber" name="trainSerialNumber" type="text" placeholder="null" class="input-xlarge">
+						</div>
 					</div>
-				</div>
-			</div>
+				</fieldset>
+			</form>
 			
-			<br />
+			<div class="btn-group">
+				 <button class="btn btn-default" type="button">n</button> 
+				 <button class="btn btn-default" type="button">u</button> 
+				 <button class="btn btn-danger" type="button">l</button> 
+				 <button class="btn btn-default" type="button">l</button>
+				 <button class="btn btn-default" type="button">.</button>
+				 <button class="btn btn-default" type="button">.</button>
+				 <button class="btn btn-default" type="button">.</button>
+				 <button class="btn btn-default" type="button">.</button>
+			</div>
 			
 			<div class="btn-group">
 				 <button class="btn btn-default" type="button">n</button> 
