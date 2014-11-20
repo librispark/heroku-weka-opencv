@@ -175,6 +175,8 @@
         	}
         	$('#trainSerialNumber').val(randSerialNum);
         	
+        	updateBtnGroup();
+        	
         	$('#tabs-18363 a[href="#panel-slide2"]').tab('show');
         	
         	console.log('check for prediction with status query here?');
@@ -201,6 +203,7 @@
 	        				$('#titleAlertStatus').removeClass().addClass('alert alert-success');
 	        				$('#titleAlertStatus').text('Ready');
 	        				$('#trainSerialNumber').val('null');
+	        				updateBtnGroup();
 	        				decisionMade = false;
 	        			},3000);
 	        			//alert alert-danger
@@ -247,6 +250,7 @@
         				$('#tabs-18363 a[href="#panel-slide1"]').tab('show');
         				$('#titleAlertStatus').text('Ready');
         				$('#trainSerialNumber').val('null');
+        				updateBtnGroup();
         				decisionMade = false;
         			},500);
         		}
@@ -296,6 +300,7 @@
         				$('#tabs-18363 a[href="#panel-slide1"]').tab('show');
         				$('#titleAlertStatus').text('Ready');
         				$('#trainSerialNumber').val('null');
+        				updateBtnGroup();
         				decisionMade = false;
         			},500);
         		}
@@ -322,6 +327,32 @@
         	clearInterval(timerTask);
         	timerTask = null;
         }
+        
+		function updateBtnGroup() {
+			var randSerialNum = $('#trainSerialNumber').val();
+			console.log('upd butt group: '+randSerialNum);
+			
+			if(randSerialNum === 'null') {
+				$('#btnGroupUpdBar0').text('..');
+				$('#btnGroupUpdBar1').text('..');
+				$('#btnGroupUpdBar2').text('..');
+				$('#btnGroupUpdBar3').text('..');
+				$('#btnGroupUpdBar4').text('..');
+				$('#btnGroupUpdBar5').text('..');
+				$('#btnGroupUpdBar6').text('..');
+				$('#btnGroupUpdBar7').text('..');
+				return;
+			}
+			
+			$('#btnGroupUpdBar0').text(randSerialNum[0]);
+			$('#btnGroupUpdBar1').text(randSerialNum[1]);
+			$('#btnGroupUpdBar2').text(randSerialNum[2]);
+			$('#btnGroupUpdBar3').text(randSerialNum[3]);
+			$('#btnGroupUpdBar4').text(randSerialNum[4]);
+			$('#btnGroupUpdBar5').text(randSerialNum[5]);
+			$('#btnGroupUpdBar6').text(randSerialNum[6]);
+			$('#btnGroupUpdBar7').text(randSerialNum[7]);
+		}
         
     </script>
 </head>
@@ -386,33 +417,31 @@
 			<br />
 			<br />
 			
+			<label class="control-label" for="trainSerialNumber">Train Operator Decision: </label>
 			<button type="button" onclick="trainLeftSwitch()" class="btn btn-primary btn-default">Train Switch On (left)</button>
 			<button type="button" onclick="trainRightSwitch()" class="btn btn-primary btn-default">Train Switch Off (straight)</button>
 			
 			<br />
 			<br />
 			
-			<form class="form-horizontal">
-				<fieldset>
-					<!-- Text input-->
-					<div class="control-group">
-						<label class="control-label" for="trainSerialNumber">Train Data (8-bit): </label>
-						<div class="controls">
-							<input id="trainSerialNumber" name="trainSerialNumber" type="text" placeholder="null" class="input-xlarge">
-						</div>
-					</div>
-				</fieldset>
-			</form>
+			<!-- Text input-->
+			<div class="control-group">
+				<label class="control-label" for="trainSerialNumber">Train Data (8-bits): </label>
+				<div class="controls">
+					<input id="trainSerialNumber" name="trainSerialNumber" type="text" value="null" class="input-xlarge">
+				</div>
+			</div>
 			
-			<div class="btn-group">
-				 <button class="btn btn-default" type="button">n</button> 
-				 <button class="btn btn-default" type="button">u</button> 
-				 <button class="btn btn-default" type="button">l</button> 
-				 <button class="btn btn-default" type="button">l</button>
-				 <button class="btn btn-default" type="button">.</button>
-				 <button class="btn btn-default" type="button">.</button>
-				 <button class="btn btn-default" type="button">.</button>
-				 <button class="btn btn-default" type="button">.</button>
+			<div id="btnGroupUpdBar" class="btn-group">
+				 <label class="control-label" for="btnGroupUpdBar">Train Data (8-bits spread out with index below): </label>
+				 <button id="btnGroupUpdBar0" class="btn btn-default" type="button">..</button>
+				 <button id="btnGroupUpdBar1" class="btn btn-default" type="button">..</button>
+				 <button id="btnGroupUpdBar2" class="btn btn-default" type="button">..</button>
+				 <button id="btnGroupUpdBar3" class="btn btn-default" type="button">..</button>
+				 <button id="btnGroupUpdBar4" class="btn btn-default" type="button">..</button>
+				 <button id="btnGroupUpdBar5" class="btn btn-default" type="button">..</button>
+				 <button id="btnGroupUpdBar6" class="btn btn-default" type="button">..</button>
+				 <button id="btnGroupUpdBar7" class="btn btn-default" type="button">..</button>
 			</div>
 			
 			<br />
