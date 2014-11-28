@@ -116,6 +116,37 @@
             });
         }
 
+        function sendPostRequestPredict(data) {
+        	
+        	console.log(data);
+        	
+            $.ajax({
+            	type: "POST",
+            	contentType: 'application/json',
+                url:'/services/analytics/runPredict',
+                data: JSON.stringify(data),
+                dataType:'json',
+                //context:document.body,
+                success:function (data, textStatus, jqXHR) {
+                	//alert(data.prediction);
+                	if(data.prediction == "left") {
+                		trainLeftSwitch();
+                	}
+                	else if(data.prediction == "right") {
+                		trainRightSwitch();
+                	}
+                    showRestResults('Success', 'alert-success', JSON.stringify(data, undefined, 2));
+                },
+                error:function (qXHR, textStatus, errorThrown) {
+                    if (errorThrown instanceof SyntaxError) {
+                        errorThrown = errorThrown.message;
+                    }
+
+                    showRestResults(textStatus, 'alert-error', errorThrown);
+                }
+            });
+        }
+        
         function sendGetRequest() {
             $.ajax({
                 url:'/services/analytics/getSchema',
@@ -134,6 +165,24 @@
             });
         }
 
+        function sendGetRequestResetHistory() {
+            $.ajax({
+                url:'/services/analytics/resetPredictionData',
+                dataType:'json',
+                context:document.body,
+                success:function (data, textStatus, jqXHR) {
+                    showRestResults('Success', 'alert-success', JSON.stringify(data, undefined, 2));
+                },
+                error:function (qXHR, textStatus, errorThrown) {
+                    if (errorThrown instanceof SyntaxError) {
+                        errorThrown = errorThrown.message;
+                    }
+
+                    showRestResults(textStatus, 'alert-error', errorThrown);
+                }
+            });
+        }
+        
         function showRestResults(headerText, headerClass, bodyText) {
         	
             //alert('headerText: '+headerText+', alert: '+headerClass+', bodyText: '+bodyText);
@@ -180,6 +229,13 @@
         	$('#tabs-18363 a[href="#panel-slide2"]').tab('show');
         	
         	console.log('check for prediction with status query here?');
+        	
+        	var predictInputObj = {
+           		trainSerialNumber: $('#trainSerialNumber').val(),
+           		operatorSwitchSelection: "right",
+           		trainSwitchDirection: "right"
+           	};
+        	sendPostRequestPredict(predictInputObj);
         	
         	function runCount(i) {
         		var currentFrame = readCurrentFrame();
@@ -408,11 +464,8 @@
 			
 			<button id="runClientProgram" type="button" onclick="runClientProgram()" class="btn btn-primary btn-default">Run (New Train Every 10s)</button>
 			<button type="button" onclick="stopClientProgram()" class="btn btn-primary btn-danger">Stop</button>
-			
-			<br />
-			<br />
-			
 			<button type="button" onclick="trainApproachDetected()" class="btn btn-primary btn-default">Create Incoming Train</button>
+			<button type="button" onclick="sendGetRequestResetHistory()" class="btn btn-primary btn-default">Reset Prediction</button>
 			
 			<br />
 			<br />
