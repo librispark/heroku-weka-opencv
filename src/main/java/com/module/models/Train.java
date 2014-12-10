@@ -9,7 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class Train {
 	private String trainSerialNumber = null;
 	private String operatorSwitchSelection = null;
-	private String prediction = "Error: Prediction returned null."; 
+	private String prediction = "Empty"; 
 	private String trainSwitchDirection = null;
 	private Time time = new Time();
 	

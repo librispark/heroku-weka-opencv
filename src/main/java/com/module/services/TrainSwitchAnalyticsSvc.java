@@ -58,7 +58,7 @@ public class TrainSwitchAnalyticsSvc {
 	@Path("/testData")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String testDatabaseInsert() throws UnknownHostException {
-		
+		// Test to insert document into database
 		MongoClientURI uri  = new MongoClientURI("mongodb://predict:terps623@ds053160.mongolab.com:53160/heroku_app31652369"); 
 	    MongoClient client = new MongoClient(uri);
  
@@ -69,7 +69,7 @@ public class TrainSwitchAnalyticsSvc {
         DBCollection collection = db.getCollection("TSA");
  
         // pase JSON string to BasicDBObject
-        String jsonInput = "{name: 'Max', age: 24, country: 'India'}";
+        String jsonInput = "{name: 'Jeremy', age: 25, country: 'United States'}";
         BasicDBObject document = (BasicDBObject) JSON.parse(jsonInput);
         
         // insert
@@ -117,9 +117,9 @@ public class TrainSwitchAnalyticsSvc {
         // get collection named "user" from db
         DBCollection collection = db.getCollection("TSApre");
         
-        // remove all
+        // limit query
         //DBCursor result = collection.find().limit(100);
-        List<DBObject> result = collection.find().limit(100).toArray();
+        List<DBObject> result = collection.find().limit(256).toArray();
         
         int numFound = result.size();
         System.out.println("History Count: "+numFound);
@@ -220,7 +220,7 @@ public class TrainSwitchAnalyticsSvc {
         
         System.out.println("isTrainingSet: "+isTrainingSet);
         
-        // Create a naïve bayes classifier 
+        // Create a j48 decision tree classifier 
         Classifier cModel = (Classifier)new J48();
         cModel.buildClassifier(isTrainingSet);
         
@@ -301,11 +301,11 @@ public class TrainSwitchAnalyticsSvc {
         iUse.setDataset(isTrainingSet);
         
         // Get the likelihood of each classes 
-        // fDistribution[0] is the probability of being “left” 
-        // fDistribution[1] is the probability of being “right” 
-        double[] fDistribution = cModel.distributionForInstance(iUse);
+        // iDistribution[0] is the probability of being “left” 
+        // iDistribution[1] is the probability of being “right” 
+        double[] iDistribution = cModel.distributionForInstance(iUse);
         
-        System.out.println("fDistribution: [0] " + fDistribution[0] + ", [1] "+fDistribution[1]);
+        System.out.println("iDistribution: [0] " + iDistribution[0] + ", [1] "+iDistribution[1]);
         
         client.close();
         
@@ -314,15 +314,15 @@ public class TrainSwitchAnalyticsSvc {
         	return train;
         }
         
-        //String jsonOut = "{probLeft: "+fDistribution[0]+", probRight:"+fDistribution[1]+", wekaSum: "+strSummary+", confMatrix: "+cmMatrix+"}";
-        if(fDistribution[0] != fDistribution[1]) {
-        	if(fDistribution[0] >= 1.0) {
+        //String jsonOut = "{probLeft: "+iDistribution[0]+", probRight:"+iDistribution[1]+", wekaSum: "+strSummary+", confMatrix: "+cmMatrix+"}";
+        if(iDistribution[0] != iDistribution[1]) {
+        	if(iDistribution[0] >= 1.0) {
         		System.out.println("left");
         		train.setPrediction("left");
         		train.setOperatorSwitchSelection(null);
         		train.setTrainSwitchDirection(null);
         	}
-        	else if(fDistribution[1] >= 1.0) {
+        	else if(iDistribution[1] >= 1.0) {
         		System.out.println("right");
         		train.setPrediction("right");
         		train.setOperatorSwitchSelection(null);
@@ -353,7 +353,7 @@ public class TrainSwitchAnalyticsSvc {
         BasicDBObject document = new BasicDBObject();
         document.put("trainSerialNumber", train.getTrainSerialNumber());
         document.put("operatorSwitchSelection", train.getOperatorSwitchSelection());
-        document.put("prediction", train.getPrediction());
+        document.put("prediction", "N/A");
         document.put("trainSwitchDirection", train.getTrainSwitchDirection());
         BasicDBObject time = new BasicDBObject();
         time.put("timezone",train.getTime().getTimezone());
