@@ -119,7 +119,7 @@ public class TrainSwitchAnalyticsSvc {
         
         // limit query
         //DBCursor result = collection.find().limit(100);
-        List<DBObject> result = collection.find().limit(256).toArray();
+        List<DBObject> result = collection.find().limit(1000).toArray();
         
         int numFound = result.size();
         System.out.println("History Count: "+numFound);
@@ -200,7 +200,7 @@ public class TrainSwitchAnalyticsSvc {
         isTrainingSet.setClassIndex(8);
         
         for(int j=0; j<numFound; j++) {
-        	System.out.println("Entry: "+result.get(j));
+        	//System.out.println("Entry: "+result.get(j));
             // Create the instance
             Instance iExample = new DenseInstance(9);
             iExample.setValue((Attribute)fvWekaAttributes.elementAt(0), result.get(j).get("trainData0").toString());      
@@ -230,7 +230,7 @@ public class TrainSwitchAnalyticsSvc {
         isTestingSet.setClassIndex(8);
         
         for(int j=0; j<numFound; j++) {
-        	System.out.println("Entry: "+result.get(j));
+        	//System.out.println("Entry: "+result.get(j));
             // Create the instance
             Instance iExample = new DenseInstance(9);
             iExample.setValue((Attribute)fvWekaAttributes.elementAt(0), result.get(j).get("trainData0").toString());      
