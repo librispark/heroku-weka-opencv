@@ -59,7 +59,7 @@ public class TrainSwitchAnalyticsSvc {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String testDatabaseInsert() throws UnknownHostException {
 		// Test to insert document into database
-		MongoClientURI uri  = new MongoClientURI("mongodb://predict:terps623@ds053160.mongolab.com:53160/heroku_app31652369"); 
+		MongoClientURI uri  = new MongoClientURI( System.getenv("MONGODB_URI") ); 
 	    MongoClient client = new MongoClient(uri);
  
         // get/select database
@@ -85,7 +85,7 @@ public class TrainSwitchAnalyticsSvc {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String resetPredictionData() throws UnknownHostException {
 		
-		MongoClientURI uri  = new MongoClientURI("mongodb://predict:terps623@ds053160.mongolab.com:53160/heroku_app31652369"); 
+		MongoClientURI uri  = new MongoClientURI( System.getenv("MONGODB_URI") ); 
 	    MongoClient client = new MongoClient(uri);
  
         // get/select database
@@ -108,7 +108,7 @@ public class TrainSwitchAnalyticsSvc {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Train runPredict(Train train) throws Exception {
 		
-		MongoClientURI uri  = new MongoClientURI("mongodb://predict:terps623@ds053160.mongolab.com:53160/heroku_app31652369"); 
+		MongoClientURI uri  = new MongoClientURI( System.getenv("MONGODB_URI") ); 
 	    MongoClient client = new MongoClient(uri);
  
         // get/select database
@@ -339,7 +339,7 @@ public class TrainSwitchAnalyticsSvc {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Train postAnaltyics(Train train) throws UnknownHostException {
         // connect to mongodb
-		MongoClientURI uri  = new MongoClientURI("mongodb://predict:terps623@ds053160.mongolab.com:53160/heroku_app31652369"); 
+		MongoClientURI uri  = new MongoClientURI( System.getenv("MONGODB_URI") ); 
 	    MongoClient client = new MongoClient(uri);
  
         // get/select database
